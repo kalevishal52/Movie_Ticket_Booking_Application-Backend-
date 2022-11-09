@@ -37,8 +37,8 @@ public class User {
 	@Pattern(regexp = "[7-9][0-9]{9}",message = "Mobile number should start with 7-9 and of size 10")
 	private String mobileNumber;
 	
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8, 20}$"
-			,message = "Pass must should in size 8-20, contains atleast 1 digit,1 uppercase letter,1 special character,and no whitespace")
+//	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$"
+//			,message = "Password must should in size 8-20, 1 lowercase leter, contains atleast 1 digit,1 specialCharacher")
 	private String password;
 	
 	@Email(message = "Enter a valid emailId")

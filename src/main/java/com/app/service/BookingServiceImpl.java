@@ -79,6 +79,10 @@ public class BookingServiceImpl implements BookingService {
 		if(!responce)
 			throw new BookingException("Seat is Not available");
 		
+		show.setAvailableSeats(show.getAvailableSeats() - listOfSeatId.size());	//
+		showRepo.save(show) ;													//
+		
+		
 		Booking booking = new Booking(userId, show, BookingStatus.Created) ;
 		
 		bookingRepo.save(booking) ;
@@ -118,6 +122,7 @@ public class BookingServiceImpl implements BookingService {
 		User user = userRepo.findById(userId).orElseThrow(()-> new BookingException("Invalid UserID")) ;
 		
 		seatLockService.validateLock(booking.getShows()) ;
+		
 		List<SeatLock> seatLocks = seatLockRepo.findByLockedByUser(booking.getUserId()) ;
 		
 		if(seatLocks.size() == 0) 
@@ -134,9 +139,9 @@ public class BookingServiceImpl implements BookingService {
 			booking.getSeats().add(seat);
 		}
 		
-		Shows currentShow = booking.getShows();
-		currentShow.setAvailableSeats(currentShow.getAvailableSeats() - seatNoList.size());
-		showRepo.save(currentShow);
+//		Shows currentShow = booking.getShows();	/											//***
+//		currentShow.setAvailableSeats(currentShow.getAvailableSeats() - seatNoList.size());	//***
+//		showRepo.save(currentShow);
 		
 		booking.setBookingStatus(BookingStatus.Conformed);
 		booking = bookingRepo.save(booking) ;

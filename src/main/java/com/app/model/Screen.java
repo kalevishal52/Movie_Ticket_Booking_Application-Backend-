@@ -38,7 +38,7 @@ public class Screen {
 	
 	private Integer seatRows;
 	private Integer seatCols;
-	
+	private Double seatPrice;
 	
 }
 

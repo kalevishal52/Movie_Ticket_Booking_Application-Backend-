@@ -36,6 +36,12 @@ public class ScreenServiceImpl implements ScreenService {
 		
 		Theatre theatre = theatreOpt.get();
 		
+		for(Screen presentScreen : theatre.getScreens()) {
+			if(presentScreen.getName().equals(screenName)) {
+				throw new ScreenException("theatreId "+theaterId +" screen name "+screenName +" is already Present", new ScreenException()) ;
+			}
+		}
+		
 		Screen screen = new Screen();
 		screen.setName(screenName);
 		screen.setTheatre(theatre);
@@ -50,7 +56,7 @@ public class ScreenServiceImpl implements ScreenService {
 	}
 
 	@Override
-	public Screen addSeatsToScreen(Integer rows, Integer cols,Integer screenId) throws ScreenException {
+	public Screen addSeatsToScreen(Integer rows, Integer cols,Integer screenId,Double seatPrice) throws ScreenException {
 
 		Screen screen = screenRepo.findById(screenId).orElseThrow(() -> new ScreenException("Invalid ScreenId " +screenId)) ;
 		
@@ -71,10 +77,10 @@ public class ScreenServiceImpl implements ScreenService {
 		screen.setNoOfSeats(rows*cols);
 		screen.setSeatRows(rows);
 		screen.setSeatCols(cols);
+		screen.setSeatPrice(seatPrice);
 		
 		return screenRepo.save(screen);
-		
-		
+			
 	}
 
 }

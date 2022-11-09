@@ -27,7 +27,6 @@ public class SeatLock {
 	private Integer timeoutInSeconds;
 	private LocalDateTime dateTime;
 	private Integer lockedByUser;
-	private Integer bookingId;
 	
 	public SeatLock(Integer seatId, Integer showsId, Integer timeoutInSeconds, LocalDateTime dateTime,
 			Integer lockedByUser) {
@@ -39,16 +38,7 @@ public class SeatLock {
 		this.lockedByUser = lockedByUser;
 	}
 
-	public SeatLock(Integer seatId, Integer showsId, Integer timeoutInSeconds, LocalDateTime dateTime,
-			Integer lockedByUser, Integer bookingId) {
-		super();
-		this.seatId = seatId;
-		this.showsId = showsId;
-		this.timeoutInSeconds = timeoutInSeconds;
-		this.dateTime = dateTime;
-		this.lockedByUser = lockedByUser;
-		this.bookingId = bookingId;
-	}
+
 	
 	
 	

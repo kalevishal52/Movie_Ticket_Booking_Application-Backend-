@@ -115,6 +115,7 @@ public class ShowServiceImpl implements ShowsService {
 		ShowInfo showInfo = new ShowInfo(show.getShowId(), show.getShowTiming(),
 										 show.getDurationInSeconds(), show.getScreen().getScreenId(), 
 										 show.getScreen().getName(), show.getScreen().getNoOfSeats(), 
+										 show.getAvailableSeats(),
 										 show.getScreen().getTheatre().getTheatreId(), show.getScreen().getTheatre().getName(),
 										 show.getScreen().getTheatre().getAddress(), show.getMovie()) ;
 		

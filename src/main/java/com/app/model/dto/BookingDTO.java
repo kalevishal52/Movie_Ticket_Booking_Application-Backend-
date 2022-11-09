@@ -24,7 +24,7 @@ public class BookingDTO {
 	private List<Integer> seatsId = new ArrayList<>();
 	
 	private BookingStatus bookingStatus; 
-	
+	private Double totalBillAmount;
 }
 
 

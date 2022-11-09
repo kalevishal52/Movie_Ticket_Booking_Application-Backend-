@@ -16,6 +16,7 @@ import com.app.model.Shows;
 import com.app.repository.BookingRepo;
 import com.app.repository.SeatLockRepo;
 import com.app.repository.SeatRepo;
+import com.app.repository.ShowRepo;
 
 @Service
 public class SeatLockServiceImpl implements SeatLockService {
@@ -30,6 +31,9 @@ public class SeatLockServiceImpl implements SeatLockService {
 	
 	@Autowired
 	private BookingRepo bookingRepo;
+	
+	@Autowired
+	private ShowRepo showRepo;
 	
 	@Override
 	public List<Seat> getAllLockedSeats(Shows show) throws SeatLockException {
@@ -77,14 +81,12 @@ public class SeatLockServiceImpl implements SeatLockService {
 			
 			LocalDateTime dateTimeNow = LocalDateTime.now(); 
 			LocalDateTime expiryTime = seatLock.getDateTime().plusSeconds(lockTimeInSeconds) ;
-			
-//			System.out.println(dateTimeNow);
-//			System.out.println(expiryTime);
-//			System.out.println("__________");
-			
+				
 			if(dateTimeNow.isAfter(expiryTime)) {
 
 				seatLockRepo.delete(seatLock);
+				
+				shows.setAvailableSeats(shows.getAvailableSeats()+1);	// ***
 				
 				List<Booking> expiredBookings =  bookingRepo.getBookingByUserShowAndStatus(seatLock.getLockedByUser(), shows, BookingStatus.Created) ;
 				
@@ -93,14 +95,10 @@ public class SeatLockServiceImpl implements SeatLockService {
 					bookingRepo.save(expireBooking);
 				}
 				
-//				Booking currentBooking = bookingRepo.findById(seatLock.getBookingId()).orElseThrow(()->new SeatLockException("Booking not found")) ;
-//				currentBooking.setBookingStatus(BookingStatus.Expired);
-//				bookingRepo.save(currentBooking);
-				
 				flag = false;
 			}
 		}
-		
+		showRepo.save(shows) ;
 		
 		return flag;
 	}

@@ -38,6 +38,7 @@ public class Booking {
 	private List<Seat> seats = new ArrayList<>();
 	
 	private BookingStatus bookingStatus;
+	private Double totalBillAmount;
 
 	public Booking(Integer userId, Shows shows, List<Seat> seats, BookingStatus bookingStatus) {
 		super();

@@ -24,6 +24,7 @@ public class ShowInfo {
 	private Integer screenId;
 	private String screenName;
 	private Integer noOfSeats;
+	private Integer availableSeats;
 	
 	private Integer theatreId;
 	private String theatreName;

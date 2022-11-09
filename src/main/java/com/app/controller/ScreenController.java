@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -35,11 +36,14 @@ public class ScreenController {
 	
 	@PostMapping("/screens/seats")
 	public ResponseEntity<Screen> addSeatsToScreenHandler(
-			@Valid @Size(min = 1,message = "row should be min 1") @RequestParam("noOfRows") Integer rows,
-		    @Size(min = 1,message = "col should be min 1") @RequestParam("noOfCols") Integer cols,
-		    @RequestParam("screenId") Integer screenId) throws ScreenException {
+			
+			@Valid @Min(value = 1,message = "row should be min 1") @RequestParam("noOfRows") Integer rows,
+			@Min(value = 1,message = "col should be min 1") @RequestParam("noOfCols") Integer cols,
+		    @RequestParam("screenId") Integer screenId,
+		    @Min(value = 1,message = "Seat price cant be negative/zeor") @RequestParam("seatPrice") Double seatPrice) throws ScreenException {
 		
-		Screen screenWithaddedSeat  = screenService.addSeatsToScreen(rows, cols, screenId);
+		
+		Screen screenWithaddedSeat  = screenService.addSeatsToScreen(rows, cols, screenId,seatPrice);
 		
 		return new ResponseEntity<Screen>(screenWithaddedSeat,HttpStatus.CREATED) ;
 		
