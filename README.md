@@ -172,7 +172,8 @@ This is an Individual project, I have worked on the rest API service for Movie T
   "totalBillAmount": 320
 }
 ```
-**In the above booking booking status is "Created" and now you nave to conform booking in 5 minutes or your choosen seat will be available for others.**
+
+## In the above booking booking status is "Created" and now you nave to conform booking in 5 minutes or your choosen seat will be available for others.
 
 #### Post : /bookings/conform?bookingId=99&userId=1
 ```
